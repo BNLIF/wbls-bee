@@ -3,10 +3,11 @@
 ## Prepare the data
 
 ```bash
+cd scripts/
 root -b -q loadClasses.C 'run.C("/path/to/ratfile.root", eventNo)'
 ```
 
-This will create a directory `data/` under the current directory with the following structure:
+This will create a new directory `data/` under the `scripts/` directory with the following structure:
 ```
 data/
 ├── 0
