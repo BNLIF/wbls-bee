@@ -1,0 +1,6 @@
+*.so
+*.d
+*.root
+.DS_Store
+upload.sh
+data/
