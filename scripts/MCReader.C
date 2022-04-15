@@ -42,18 +42,20 @@ void MCReader(char* ratfile, int eventNo, TString option){
     for (int i=0; i < size_mc; i++) {
         DS::MCTrack *track = mc->GetMCTrack(i);
         if (i % 100000 == 0) cout << "processing track " << i << endl;
-        if (! (track->GetParticleName() == "opticalphoton") ) continue;
+        //if (! (track->GetParticleName() == "opticalphoton") ) continue;
         int size_step = track->GetMCTrackStepCount();
         for (int j=0; j < size_step; j++) {
             DS::MCTrackStep *step = track->GetMCTrackStep(j); // Copy over initial step
-            if ( option == "Cerenkov" ||
-                 option == "Transportation" ||
-                 option == "Attenuation" ||
-                 option == "G4FastSimulationManagerProcess"
+            if (option == "opticalphoton" ||
+		option == "Cerenkov" ||
+		option == "Transportation" ||
+		option == "Attenuation" ||
+		option == "G4FastSimulationManagerProcess"
                 ) {
                 if (! (step->GetProcess() == option) ) continue;
             }
             else { cout << "Sorry, option not recognized" << endl; }
+
             TVector3 vec = step->GetEndpoint();
             // if (vec.Mag()>10000) continue;
             xx.push_back(vec.X()); yy.push_back(vec.Y()); zz.push_back(vec.Z());
@@ -62,7 +64,8 @@ void MCReader(char* ratfile, int eventNo, TString option){
             wlwl.push_back(1240e-6/step->GetKE()); // nm
 
             TString name = step->GetProcess();
-            if (! ( name == "Cerenkov" ||
+            if (! (name == "opticalphoton" ||
+		   name == "Cerenkov" ||
                     name == "Transportation" ||
                     name == "Attenuation" ||
                     name == "G4FastSimulationManagerProcess")
