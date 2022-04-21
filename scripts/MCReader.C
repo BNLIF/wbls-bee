@@ -45,7 +45,7 @@ void MCReader(char* ratfile, int eventNo, TString option){
         //if (! (track->GetParticleName() == "opticalphoton") ) continue;
         int size_step = track->GetMCTrackStepCount();
         for (int j=0; j < size_step; j++) {
-            DS::MCTrackStep *step = track->GetMCTrackStep(0); // Copy over initial step
+            DS::MCTrackStep *step = track->GetMCTrackStep(j); // Copy over initial step
             if (option == "Cerenkov" ||
 		option == "Transportation" ||
 		option == "Attenuation" ||
