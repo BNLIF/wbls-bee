@@ -45,9 +45,8 @@ void MCReader(char* ratfile, int eventNo, TString option){
         //if (! (track->GetParticleName() == "opticalphoton") ) continue;
         int size_step = track->GetMCTrackStepCount();
         for (int j=0; j < size_step; j++) {
-            DS::MCTrackStep *step = track->GetMCTrackStep(j); // Copy over initial step
-            if (option == "opticalphoton" ||
-		option == "Cerenkov" ||
+            DS::MCTrackStep *step = track->GetMCTrackStep(0); // Copy over initial step
+            if (option == "Cerenkov" ||
 		option == "Transportation" ||
 		option == "Attenuation" ||
 		option == "G4FastSimulationManagerProcess"
@@ -64,8 +63,7 @@ void MCReader(char* ratfile, int eventNo, TString option){
             wlwl.push_back(1240e-6/step->GetKE()); // nm
 
             TString name = step->GetProcess();
-            if (! (name == "opticalphoton" ||
-		   name == "Cerenkov" ||
+            if (! ( name == "Cerenkov" ||
                     name == "Transportation" ||
                     name == "Attenuation" ||
                     name == "G4FastSimulationManagerProcess")
