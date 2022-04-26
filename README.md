@@ -28,9 +28,39 @@ After you verify all files are produced correctly, move the whole `data/` direct
 
 ## View the data 
 
+If you're using python2, do:
 ```bash
 python -m SimpleHTTPServer
 ```
+
+If you're using python3, do:
+```bash
+python -m http.server
+```
+
 Then open a web browser and go to `http://localhost:8000/`
 
 Depending on how many events are under the `data/` directory, you may want to change the `MAX_EVENTS` accordingly at the top of the file `js/wbls.js`. The event numbers must start from 0 and increase continuously.
+
+## Remote Access
+
+The following uses Milind workstation (`mvd`) as the server as an example.
+
+Login mvd with ssh forwarding of localhost:
+```bash
+ssh -L 8000:localhost:8000 mvd
+```
+where `mvd` is alias for host, which I've set up in my ~/.ssh/config file on local machine:
+
+```bash
+Host mvd
+     ForwardAgent yes
+     ForwardX11 yes
+     ForwardX11Trusted yes
+     HostKeyAlias mvd
+     Hostname mvd
+     PreferredAuthentications publickey
+     ProxyCommand ssh -A [username]@physsh.phy.bnl.gov -W %h:%p
+     ServerAliveInterval 60
+     User [username]
+```
